@@ -14,7 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-enum planck_layers { _QWERTY, _COLEMAK, _DVORAK, _LOWER, _RAISE, _PLOVER, _ADJUST };
+enum planck_layers { _QWERTY, _COLEMAK, _DVORAK, _LOWER, _RAISE, _PLOVER, _ADJUST,
+		     _KAROVD};
 
 enum planck_keycodes { QWERTY = SAFE_RANGE, COLEMAK, DVORAK, PLOVER, BACKLIT, EXT_PLV };
 
@@ -75,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC       ,
     KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH       ,
     KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    RSFT_T(KC_ENT),
-    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,           RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER, LT(_KAROVD, KC_SPC),RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Lower
@@ -149,6 +150,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, EE_CLR,  MU_NEXT, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, TO(_QWERTY),  TO(_COLEMAK), TO(_DVORAK),  TO(_PLOVER),  _______,
     _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______
+),
+
+/* Karovd
+ * .-----------------------------------------------------------------------------------.
+ * | BSPC |  L   |  R   |  C   |  G   |  F   |  Y   |  P   |  DOT | COMM | QUOT | TAB  |   
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | SLSH |  S   |  N   |  T   |  H   |  D   |  I   |  U   |  E   |  O   |  A   | ESC  |   
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | ENT  |  Z   |  V   |  W   |  M   |  B   |  X   |  K   |  J   |  Q   | SCLN | LSFT |  
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | RGHT |  UP  | DOWN | LEFT | RAISE|     SPC     | LOWER|  GUI | LALT | LCTL | LIGHT|
+ * .-----------------------------------------------------------------------------------.
+ */
+
+[_KAROVD] = LAYOUT_planck_mit(
+	KC_BSPC, KC_L   , KC_R   , KC_C   , KC_G   , KC_F   , KC_Y   , KC_P   , KC_DOT , KC_COMM, KC_QUOT, KC_TAB ,  
+	KC_SLSH, KC_S   , KC_N   , KC_T   , KC_H   , KC_D   , KC_I   , KC_U   , KC_E   , KC_O   , KC_A   , KC_ESC ,  
+ RSFT_T(KC_ENT), KC_Z   , KC_V   , KC_W   , KC_M   , KC_B   , KC_X   , KC_K   , KC_J   , KC_Q   , KC_SCLN, KC_LSFT, 
+	KC_RGHT, KC_UP  , KC_DOWN, KC_LEFT, RAISE  ,          KC_SPC , LOWER  , KC_LGUI, KC_LALT, KC_LCTL, BACKLIT 
 )
 
 };

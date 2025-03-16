@@ -2,3 +2,4 @@
 # https://github.com/manna-harbour/miryoku
 
 MIRYOKU_ALPHAS=DVORAK
+KEY_OVERRIDE_ENABLE = YES
